@@ -10,18 +10,32 @@ import os
 def addZeroes(file):
     f = open('docs/' + file)
     csv_f = csv.reader(f)
-    for row in csv_f:
-        print row
+    f_reader = list(csv_f)
+    for i in range(len(f_reader)):
+        if i < 2:
+            continue
+        for j in range(len(f_reader[i])):
+            #raw_input(f_reader[i][j])
+            if j < 3:
+                continue
+            if f_reader[i][j] == '':
+                f_reader[i][j] = '0.0'
+        print f_reader[i]
+    return f_reader
+
+def saveFile(filename, inputfile):
+    # Build filename
+    filename = 'docs/output/' + filename
+
+    with open(filename, "w") as output:
+        writer = csv.writer(output, lineterminator='\n')
+        writer.writerows(inputfile)
 
 count = 0
 for (dirname, dirs, files) in os.walk('docs'):
    for filename in files:
        if filename.endswith('.csv') :
            count = count + 1
-       addZeroes(filename)
-       print '\n\nDone\n\n'
-print 'Files:', count
+           newFile = addZeroes(filename)
 
-
-
-# Loop through rows
+           saveFile(filename, newFile)
