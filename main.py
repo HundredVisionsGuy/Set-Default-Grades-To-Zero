@@ -1,5 +1,6 @@
 # SetDefaultToZero.py
 # By HundredVisionsGuy
+#!python2
 # Takes a Canvas-generated CSV grade export and changes
 # all unscored assignments to 0
 
@@ -20,7 +21,7 @@ def addZeroes(file):
                 continue
             if f_reader[i][j] == '':
                 f_reader[i][j] = '0.0'
-        print f_reader[i]
+        print( f_reader[i])
     return f_reader
 
 def saveFile(filename, inputfile):
